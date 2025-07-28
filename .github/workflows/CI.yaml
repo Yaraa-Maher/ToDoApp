@@ -1,0 +1,39 @@
+name: ToDo-CI
+
+on: push
+
+jobs:
+
+  Docker:
+    name: Dockerize the application.
+    runs on: ubuntu-latest
+
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ vars.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_TOKEN }}
+
+        name: Build Docker Image
+        uses: docker/build-push-action@v6
+        with:
+          push: true
+          tags: ${{ vars.DOCKER_USERNAME }}/todoapp:${{ github.sha }}
+
+
+      - name: Run Container and Test
+        run: |
+          docker run -d --name test-container -p 4000:4000 ${{ vars.DOCKER_USERNAME }}/todoapp:${{ github.sha }}
+          sleep 5 
+          curl --fail http://localhost:4000 || (echo "App failed to start" && exit 1)
+
+
+        name: Push Docker Image 
+        uses: docker/build-push-action@v6
+        with:
+          push: false
+          tags: ${{ vars.DOCKER_USERNAME }}/todoapp:${{ github.sha }}
