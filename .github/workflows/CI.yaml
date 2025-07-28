@@ -6,7 +6,7 @@ jobs:
 
   Docker:
     name: Dockerize the application.
-    runs on: ubuntu-latest
+    runs-on: ubuntu-latest
 
     steps:
       - name: checkout
