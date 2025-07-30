@@ -1,0 +1,83 @@
+---
+- name: Install Minikube on EC2
+  hosts: target
+  become: true
+  vars:
+    minikube_version: v1.33.1
+    kubectl_version: v1.30.1
+    docker_user: ec2-user
+
+  tasks:
+
+  - name: Install required packages individually
+    yum:
+      name: "{{ item }}"
+      state: present
+    loop:
+      - curl
+      - wget
+      - unzip
+      - conntrack
+      - socat
+      - git
+      - yum-utils
+      - device-mapper-persistent-data
+      - lvm2
+    register: package_result
+    ignore_errors: yes
+
+  - name: Debug failed packages
+    debug:
+      msg: "Failed to install {{ item.item }}"
+    loop: "{{ package_result.results }}"
+    when: item.failed
+
+
+  - name: Add Docker repository
+    get_url:
+      url: https://download.docker.com/linux/centos/docker-ce.repo
+      dest: /etc/yum.repos.d/docker-ce.repo
+
+  - name: Install Docker
+    yum:
+      name: docker
+      state: present
+
+  - name: Start and enable Docker
+    systemd:
+      name: docker
+      enabled: true
+      state: started
+
+  - name: Add ec2-user to docker group
+    user:
+      name: "{{ docker_user }}"
+      groups: docker
+      append: yes
+
+  - name: Install kubectl
+    get_url:
+      url: "https://dl.k8s.io/release/{{ kubectl_version }}/bin/linux/amd64/kubectl"
+      dest: /usr/local/bin/kubectl
+      mode: '0755'
+
+  - name: Install Minikube
+    get_url:
+      url: "https://storage.googleapis.com/minikube/releases/{{ minikube_version }}/minikube-linux-amd64"
+      dest: /usr/local/bin/minikube
+      mode: '0755'
+
+  - name: Ensure Minikube binary is executable
+    file:
+      path: /usr/local/bin/minikube
+      mode: '0755'
+
+  - name: Start Minikube as ec2-user
+    become: false
+    become_user: "{{ docker_user }}"
+    shell: |
+      minikube start --driver=docker
+    environment:
+      CHANGE_MINIKUBE_NONE_USER: "true"
+    args:
+      executable: /bin/bash

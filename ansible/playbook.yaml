@@ -1,6 +1,6 @@
 ---
 - name: Configure target vm
-  hosts: all
+  hosts: targets
   become: yes
   vars_files:
     - vault.yaml
@@ -11,6 +11,20 @@
       yum:
         name: git
         state: present
+
+    - name: Clone the repo
+      git:
+        repo: "https://github.com/Yaraa-Maher/ToDoApp.git"
+        dest: "/home/ec2-user/todo-app"
+        version: main
+        update: yes
+
+    - name: Set ownership to ec2-user
+      file:
+        path: "/home/ec2-user/todo-app"
+        owner: ec2-user
+        group: ec2-user
+        recurse: yes
 
     - name: Install Docker
       yum:
@@ -29,16 +43,25 @@
         groups: docker
         append: yes
 
-    - name: Install pip3
-      yum:
-        name: python3-pip
-        state: present
+    - name: Ensure /usr/local/lib/docker/cli-plugins directory exists
+      file:
+        path: /usr/local/lib/docker/cli-plugins
+        state: directory
+        mode: '0755'
+        recurse: yes
 
-    - name: Install Docker Compose
-      pip:
-        name: docker-compose
-        executable: pip3
-        extra_args: --user
+    - name: Download Docker Compose v2 binary
+      get_url:
+        url: https://github.com/docker/compose/releases/download/v2.27.0/docker-compose-linux-x86_64
+        dest: /usr/local/lib/docker/cli-plugins/docker-compose
+        mode: '0755'
+
+    - name: Create symlink for backward-compatible 'docker-compose' command
+      file:
+        src: /usr/local/lib/docker/cli-plugins/docker-compose
+        dest: /usr/local/bin/docker-compose
+        state: link
+        force: yes
 
     - name: Docker login
       community.docker.docker_login:

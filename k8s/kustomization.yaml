@@ -1,0 +1,23 @@
+resources:
+  - deployment.yaml
+  - service.yaml
+
+configMapGenerator:
+  - name: env-vars
+    envs:
+      - ../.env
+
+replacements:
+  - source:
+      kind: ConfigMap
+      name: env-vars
+      fieldPath: data.TAG
+    targets:
+      - select:
+          kind: Deployment
+          name: todo-app
+        fieldPaths:
+          - spec.template.spec.containers.[name=todo-app].image
+        options:
+          delimiter: ":"
+          index: 1
