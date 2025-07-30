@@ -15,8 +15,8 @@ spec:
         app: todo-app
     spec:
       containers:
-        - name: todo
-          image: your-docker-username/todoapp
+        - name: todo-app
+          image: your-docker-username/todoapp:xxx
           ports:
             - containerPort: 4000
           env:

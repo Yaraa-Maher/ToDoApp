@@ -72,12 +72,15 @@
       path: /usr/local/bin/minikube
       mode: '0755'
 
-  - name: Start Minikube as ec2-user
+
+  - name: Start Minikube as ansible user
     become: false
-    become_user: "{{ docker_user }}"
-    shell: |
-      minikube start --driver=docker
     environment:
       CHANGE_MINIKUBE_NONE_USER: "true"
+      HOME: "/home/ansible"
+    shell: |
+      minikube delete --all --purge || true
+      minikube start --driver=docker --memory=4096mb --cpus=2
+      kubectl config use-context minikube
     args:
       executable: /bin/bash
