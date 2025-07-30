@@ -36,8 +36,13 @@ jobs:
           docker stop test-container
           docker rm test-container
 
-      - name: Save Git SHA to .env file
-        run: echo "TAG=${{ github.sha }}" >> .env
+      - name: Save Git SHA to .env file (overwrite old TAG, keep other vars)
+        run: |
+          if grep -q '^TAG=' .env; then
+            sed -i 's/^TAG=.*/TAG=${{ github.sha }}/' .env
+          else
+            echo "TAG=${{ github.sha }}" >> .env
+          fi
 
       - name: Push Docker Image 
         uses: docker/build-push-action@v6
@@ -49,6 +54,7 @@ jobs:
         run: |
           git config user.name "Yaraa-Maher"
           git config user.email "yaramaher368@gmail.com"
+          git pull origin main --rebase || true
           git add .env
           git commit -m "Update image tag to ${{ github.sha }}"
           git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
