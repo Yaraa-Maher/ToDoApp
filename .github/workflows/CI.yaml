@@ -52,5 +52,3 @@ jobs:
           git add .env
           git commit -m "Update image tag to ${{ github.sha }}"
           git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
-        env:
-          GITHUB_TOKEN: ${{ secrets.TOKEN }}
