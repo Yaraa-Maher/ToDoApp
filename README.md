@@ -39,9 +39,8 @@ In addition to building the application, we implemented a complete DevOps lifecy
 ---
 
 ## 📂 Project Structure
+```
 
-
-## DocumentatTodos-nodejs/
 Todos-nodejs/
 ├── controllers/
 ├── models/
@@ -50,51 +49,25 @@ Todos-nodejs/
 ├── views/
 ├── .env
 ├── Dockerfile
-├── docker-compose.yml
+├── docker-compose.yaml
 ├── update-todo.sh
 ├── app.js
 ├── package.json
 ├── .github/workflows/
-│   └── ci.yml
+│   └── CI.yaml
 ├── k8s/
 │   ├── deployment.yaml
 │   ├── service.yaml
 │   ├── secret.yaml
 │   └── kustomization.yaml
 ├── ansible/
-│   ├── inventory.ini
-│   ├── playbook.yml
-│   └── vault.yml
+│   ├── inventory
+│   ├── playbook.yaml
+│   ├── vault.yaml
+│   └── install-minikube.yaml
 
+```
 
-[Documentation](https://linktodocumentation)
-
-📝 To-Do List nodeJs
-
-The to-do list application is a web-based application that allows users to create and manage a list of tasks. The user interface consists of a form to add new tasks, a list of all tasks, and controls to mark tasks as complete or delete them.
-
-To create the application, Node.js is used to set up the server and handle the logic of the application. Express.js is used to create the routes for the application, allowing the user to interact with the application through a web browser. EJS is used to create the views for the application, allowing the user to see the list of tasks and the form to add new tasks. CSS is used to style the application, making it visually appealing and easy to use.
-
-MongoDB and Mongoose are used to store the tasks in a database, allowing the user to add, delete, and update tasks as needed. Nodemon is used to monitor changes to the code and automatically restart the server, making it easy to develop and test the application.
-
-When the user adds a new task using the form, Node.js and Express.js handle the request and store the task in the database using Mongoose. When the user views the list of tasks, EJS displays the tasks from the database in a list on the web page. When the user marks a task as complete or deletes a task, Node.js and Express.js handle the request and update the database using Mongoose.
-
-Overall, the todo list application using Node.js, Express.js, EJS, CSS, JavaScript, MongoDB, Mongoose, and Nodemon can be a great way to create a functional and interactive web application that allows users to manage their tasks online. With the right combination of technologies, it is possible to create an application that is both functional and aesthetically pleasing, making it easy for users to manage their tasks in a convenient and efficient way.
-
-Technologies Used: NodeJS, ExpressJS, EJS, CSS, JavaScript, Nodemon, MongoDB, Mongoose.
-## Demo
-
-Under process...
-## Authors
-
-- [@AnkitVishwakarma](https://github.com/Ankit6098)
-
-
-## Features
-
-- Create, Update, and Delete Tasks: Enable users to create new tasks, update existing tasks (e.g., mark as completed, edit task details), and delete tasks they no longer need.
-- Task Categories provides Implement the ability for users to categorize their tasks into different categories (e.g., work, personal, shopping) or assign labels/tags to tasks for better organization and filtering.
-- MongoDb to store your the user data
 ## Run Locally
 
 Clone the project
@@ -120,6 +93,8 @@ Start the Server
 ```bash
     npm start / nodemon start
 ```
+Visit http://localhost:4000
+
 ## Acknowledgements
 
  - [nodemon](https://nodemon.io/)
@@ -138,38 +113,63 @@ Start the Server
 ![225239841-4b5d77f0-4a54-4339-b6b3-b6a1be6776b5](https://github.com/Ankit6098/Todos-nodejs/assets/92246613/f5ffc3b8-480f-4d11-9a0b-c469e3c17e8e)
 
 
-## Related
+## CI/CD with GitHub Actions
 
-Here are some other projects
+- Builds and pushes Docker images to Docker Hub
+- Saves image tag to .env for future deployment
 
-[Alarm CLock - javascript](https://github.com/Ankit6098/Todos-nodejs)\
-[IMDb Clone - javascript](https://github.com/Ankit6098/IMDb-Clone)
+## 🤖Ansible Automation
+Located in the ansible/ directory:
+
+playbook.yaml:
+Installs Docker, Docker Compose, Git, Node.js, and sets up your to-do app.
+
+vault.yaml:
+Stores encrypted DockerHub credentials using ansible-vault. Used for private image pulls.
+
+install-minikube.yaml:
+Installs Minikube, kubectl, and other dependencies to simulate a local Kubernetes cluster on EC2 or VM.
+
+inventory:
+Contains your target machine IP or hostname.
+
+To run the playbook:
+```bash
+    ansible-playbook -i inventory playbook.yaml --ask-vault-pass
+```
+
+## Docker Compose 
+This project uses Docker Compose to run the application and a todo-updater service that monitors the .env file for changes in the TAG value. When a new tag is detected (e.g., after pushing a new image), the todo-updater will:
+
+- Pull the updated Docker image using the new tag.
+- Recreate the main application container to use the new image.
+
+## Kubernates and Argocd (instead of Docker Compose)
+Files:
+- deployment.yaml – App deployment
+
+- service.yaml – Exposes the app
+
+- secret.yaml – Docker credentials secret
+
+- kustomization.yaml – Kustomize root
+
+🚢 Continuous Delivery with ArgoCD
+1- Add the repo in ArgoCD UI or CLI
+
+2- Point to the k8s/ folder as Kustomize root
+
+3- Enable auto-sync
+
+4- When a new image tag is pushed and .env is updated, the ArgoCD sync will update the cluster
 
 
-## 🚀 About Me
-I'm a full stack developer...
 
 
-# Hi, I'm Ankit! 👋
 
-I'm a full stack developer 😎 ... Love to Develop Classic Unique fascinating and Eye Catching UI and Love to Create Projects and Building logics.
-## 🔗 Links
-[![portfolio](https://img.shields.io/badge/my_portfolio-000?style=for-the-badge&logo=ko-fi&logoColor=white)](https://ankithub.me/Resume/)
-
-[![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColorwhite=)](https://www.linkedin.com/in/ankit-vishwakarma-6531221b0/)
-
-
-## Other Common Github Profile Sections
-🧠 I'm currently learning FullStack Developer Course from Coding Ninjas
-
-📫 How to reach me ankitvis609@gmail.com
-
-
-## 🛠 Skills
-React, Java, Javascript, HTML, CSS, Nodejs, ExpressJs, Mongodb, Mongoose...
 
 
 ## Feedback
 
-If you have any feedback, please reach out to us at ankitvis609@gmail.com
+If you have any feedback, please reach out to us at yaramaher368@gmail.com
 
