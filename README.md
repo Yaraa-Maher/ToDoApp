@@ -66,6 +66,18 @@ In addition to building the application, we implemented a complete DevOps lifecy
 │ ├── vault.yaml
 │ └── install-minikube.yaml
 
+- `controllers/` – Business logic for handling requests  
+- `models/` – Mongoose schemas and models  
+- `public/` – Static files (CSS, JS, images)  
+- `routes/` – Express route definitions  
+- `views/` – EJS templates for rendering HTML  
+- `.env` – Environment variable file  
+- `Dockerfile` – Docker image definition  
+- `docker-compose.yml` – Docker Compose configuration  
+- `update-todo.sh` – Script to auto-pull updated images and restart container  
+- `app.js` – Main entry point of the application  
+- `package.json` – Node.js dependencies and scripts  
+
 [Documentation](https://linktodocumentation)
 
 📝 To-Do List nodeJs
