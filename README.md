@@ -121,17 +121,17 @@ Visit http://localhost:4000
 ## 🤖Ansible Automation
 Located in the ansible/ directory:
 
-playbook.yaml:
-Installs Docker, Docker Compose, Git, Node.js, and sets up your to-do app.
+- playbook.yaml:
+  Installs Docker, Docker Compose, Git, Node.js, and sets up your to-do app.
 
-vault.yaml:
-Stores encrypted DockerHub credentials using ansible-vault. Used for private image pulls.
+- vault.yaml:
+  Stores encrypted DockerHub credentials using ansible-vault. Used for private image pulls.
 
-install-minikube.yaml:
-Installs Minikube, kubectl, and other dependencies to simulate a local Kubernetes cluster on EC2 or VM.
+- install-minikube.yaml:
+  Installs Minikube, kubectl, and other dependencies to simulate a local Kubernetes cluster on EC2 or VM.
 
-inventory:
-Contains your target machine IP or hostname.
+- inventory:
+  Contains your target machine IP or hostname.
 
 To run the playbook:
 ```bash
@@ -162,6 +162,7 @@ Files:
 3- Enable auto-sync
 
 4- When a new image tag is pushed and .env is updated, the ArgoCD sync will update the cluster
+![ArgoCD Screenshot](assets/argo.png)
 
 
 
