@@ -15,7 +15,7 @@
     - name: Clone the repo
       git:
         repo: "https://github.com/Yaraa-Maher/ToDoApp.git"
-        dest: "/home/ec2-user/todo-app"
+        dest: "/home/Ansible/todo-app"
         version: main
         update: yes
 
