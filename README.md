@@ -42,6 +42,7 @@ In addition to building the application, we implemented a complete DevOps lifecy
 
 
 ## DocumentatTodos-nodejs/
+Todos-nodejs/
 ├── controllers/
 ├── models/
 ├── public/
@@ -49,34 +50,22 @@ In addition to building the application, we implemented a complete DevOps lifecy
 ├── views/
 ├── .env
 ├── Dockerfile
-├── docker-compose.yaml
+├── docker-compose.yml
 ├── update-todo.sh
 ├── app.js
 ├── package.json
 ├── .github/workflows/
-│ └── CI.yaml
+│   └── ci.yml
 ├── k8s/
-│ ├── deployment.yaml
-│ ├── service.yaml
-│ ├── secret.yaml
-│ └── kustomization.yaml
+│   ├── deployment.yaml
+│   ├── service.yaml
+│   ├── secret.yaml
+│   └── kustomization.yaml
 ├── ansible/
-│ ├── inventory
-│ ├── playbook.yaml
-│ ├── vault.yaml
-│ └── install-minikube.yaml
+│   ├── inventory.ini
+│   ├── playbook.yml
+│   └── vault.yml
 
-- `controllers/` – Business logic for handling requests  
-- `models/` – Mongoose schemas and models  
-- `public/` – Static files (CSS, JS, images)  
-- `routes/` – Express route definitions  
-- `views/` – EJS templates for rendering HTML  
-- `.env` – Environment variable file  
-- `Dockerfile` – Docker image definition  
-- `docker-compose.yml` – Docker Compose configuration  
-- `update-todo.sh` – Script to auto-pull updated images and restart container  
-- `app.js` – Main entry point of the application  
-- `package.json` – Node.js dependencies and scripts  
 
 [Documentation](https://linktodocumentation)
 
