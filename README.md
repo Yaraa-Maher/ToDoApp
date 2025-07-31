@@ -1,3 +1,45 @@
+# 📝 To-Do List Application (Node.js + MongoDB + DevOps CI/CD + Kubernetes)
+
+## 📌 Project Overview
+
+This is a full-stack **To-Do List Web Application** built using `Node.js`, `Express.js`, and `MongoDB` that allows users to **create**, **update**, **delete**, and **categorize** tasks. The application includes a frontend rendered using `EJS` and styled with `CSS`, and a backend with RESTful routes and MongoDB database integration.
+
+In addition to building the application, we implemented a complete DevOps lifecycle using:
+
+- **Docker** for containerization
+- **GitHub Actions** for CI/CD
+- **Ansible** for remote server provisioning
+- **Kubernetes** (EKS) for orchestration
+- **ArgoCD** for GitOps-based continuous delivery
+
+---
+
+## 🚀 Features
+
+- ✅ Create, update, and delete tasks
+- 🏷️ Categorize tasks using labels (e.g., Work, Personal)
+- 🔒 Secure credentials using Ansible Vault
+- 📦 Containerized with Docker and deployed via Docker Compose or Kubernetes
+- 🔄 CI/CD pipeline with GitHub Actions and automated image tagging
+- ⚙️ Ansible automation for provisioning servers and deployment setup
+- 🧠 Self-updating Docker deployment with systemd service
+- ☸️ Kubernetes deployment with ArgoCD-based CD
+
+---
+
+## 🧰 Tech Stack
+
+| Layer       | Technologies |
+|-------------|--------------|
+| Frontend    | EJS, CSS, JavaScript |
+| Backend     | Node.js, Express.js |
+| Database    | MongoDB, Mongoose |
+| DevOps      | Docker, GitHub Actions, Ansible, systemd, Kubernetes (EKS), ArgoCD |
+
+---
+
+## 📂 Project Structure
+
 
 ## Documentation
 
