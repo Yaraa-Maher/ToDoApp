@@ -162,7 +162,7 @@ Files:
 3- Enable auto-sync
 
 4- When a new image tag is pushed and .env is updated, the ArgoCD sync will update the cluster
-![ArgoCD Screenshot](assets/argo.png)
+![ArgoCD Screenshot](./assets/argo.PNG)
 
 
 
