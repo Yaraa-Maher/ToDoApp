@@ -9,7 +9,7 @@ In addition to building the application, we implemented a complete DevOps lifecy
 - **Docker** for containerization
 - **GitHub Actions** for CI/CD
 - **Ansible** for remote server provisioning
-- **Kubernetes** (EKS) for orchestration
+- **Kubernetes** for orchestration
 - **ArgoCD** for GitOps-based continuous delivery
 
 ---
@@ -34,14 +34,37 @@ In addition to building the application, we implemented a complete DevOps lifecy
 | Frontend    | EJS, CSS, JavaScript |
 | Backend     | Node.js, Express.js |
 | Database    | MongoDB, Mongoose |
-| DevOps      | Docker, GitHub Actions, Ansible, systemd, Kubernetes (EKS), ArgoCD |
+| DevOps      | Docker, GitHub Actions, Ansible, systemd, Kubernetes, ArgoCD |
 
 ---
 
 ## 📂 Project Structure
 
 
-## Documentation
+## DocumentatTodos-nodejs/
+├── controllers/
+├── models/
+├── public/
+├── routes/
+├── views/
+├── .env
+├── Dockerfile
+├── docker-compose.yaml
+├── update-todo.sh
+├── app.js
+├── package.json
+├── .github/workflows/
+│ └── CI.yaml
+├── k8s/
+│ ├── deployment.yaml
+│ ├── service.yaml
+│ ├── secret.yaml
+│ └── kustomization.yaml
+├── ansible/
+│ ├── inventory
+│ ├── playbook.yaml
+│ ├── vault.yaml
+│ └── install-minikube.yaml
 
 [Documentation](https://linktodocumentation)
 
