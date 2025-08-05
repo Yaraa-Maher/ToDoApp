@@ -1,6 +1,7 @@
 resources:
   - deployment.yaml
   - service.yaml
+  - secrets.yaml
 
 configMapGenerator:
   - name: env-vars
