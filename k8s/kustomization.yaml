@@ -8,6 +8,9 @@ configMapGenerator:
     envs:
       - .env
 
+generatorOptions:
+  disableNameSuffixHash: false  # Important: leave hash enabled so ArgoCD sees a diff
+
 replacements:
   - source:
       kind: ConfigMap
