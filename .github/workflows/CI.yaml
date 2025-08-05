@@ -43,7 +43,7 @@ jobs:
         run: |
           if grep -q '^TAG=' .env; then
             sed -i 's/^TAG=.*/TAG=${{ github.sha }}/' .env
-            cp .env /k8s/.env
+            cp .env ./k8s/.env
           else
             echo "TAG=${{ github.sha }}" >> .env
           fi
