@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: todo-app
-          image: yaramaher21/todoapp:bbc27edc44c2df43b03477f3c95d89cc50e0d84f
+          image: yaramaher21/todoapp:TAG
           ports:
             - containerPort: 4000
           env:
