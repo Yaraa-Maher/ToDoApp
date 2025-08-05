@@ -14,7 +14,6 @@
       name: "{{ item }}"
       state: present
     loop:
-      - curl
       - wget
       - unzip
       - conntrack
@@ -25,13 +24,6 @@
       - lvm2
     register: package_result
     ignore_errors: yes
-
-  - name: Debug failed packages
-    debug:
-      msg: "Failed to install {{ item.item }}"
-    loop: "{{ package_result.results }}"
-    when: item.failed
-
 
   - name: Add Docker repository
     get_url:
@@ -71,7 +63,6 @@
     file:
       path: /usr/local/bin/minikube
       mode: '0755'
-
 
   - name: Start Minikube as ansible user
     become: false
