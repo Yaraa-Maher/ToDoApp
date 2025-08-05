@@ -5,7 +5,7 @@ resources:
 configMapGenerator:
   - name: env-vars
     envs:
-      - ../.env
+      - .env
 
 replacements:
   - source:
