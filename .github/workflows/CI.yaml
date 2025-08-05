@@ -43,7 +43,6 @@ jobs:
         run: |
           if grep -q '^TAG=' .env; then
             sed -i 's/^TAG=.*/TAG=${{ github.sha }}/' .env
-            cp .env ./k8s/.env
           else
             echo "TAG=${{ github.sha }}" >> .env
           fi
@@ -57,9 +56,10 @@ jobs:
 
       - name: Commit updated .env file
         run: |
+          cp .env ./k8s/.env
           git config user.name "Yaraa-Maher"
           git config user.email "yaramaher368@gmail.com"
           git pull origin main --rebase || true
-          git add .env
+          git add .env ./k8s/.env
           git commit -m "Update image tag to ${{ github.sha }}"
           git push https://x-access-token:${{ secrets.TOKEN }}@github.com/${{ github.repository }}.git
