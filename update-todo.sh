@@ -5,7 +5,7 @@ USERNAME="yaramaher21"
 DOCKER_REPO="todoapp"
 BRANCH="main"
 
-APP_DIR="/home/ec2-user/todo-app"
+APP_DIR="/home/ansible/todo-app"
 COMPOSE_FILE="$APP_DIR/docker-compose.yaml"
 ENV_FILE="$APP_DIR/.env"
 
@@ -14,7 +14,7 @@ if [[ -z "$TAG" ]]; then
 fi
 
 while true; do
-  LATEST_TAG=$(curl -s https://api.github.com/repos/$REPO/commits/$BRANCH | jq -r .sha)
+  LATEST_TAG=$(curl -s https://api.github.com/repos/$REPO/commits/$BRANCH | jq -r '.commit.message' | grep -oE '[a-f0-9]{40}')
 
   if [[ -z "$LATEST_TAG" || "$LATEST_TAG" == "null" ]]; then
     echo "Failed to fetch latest SHA"
